@@ -1,1 +1,41 @@
+---- Q1. Which customer has the highest spend? 
+SQL Query :
 
+SELECT c.customerid, c.name, SUM(t.totalamount) AS totalspend
+FROM customers c 
+JOIN transcations t ON c.customerid = t.customerid
+GROUP BY c.name,c.customerid
+ORDER BY c.customerid;
+
+---- Q2. What is the average transaction amont per customer?
+SQL Query :
+
+SELECT c.customerid, c.name, AVG(t.totalamount) AS AvgTransactionAmount
+FROM customer c
+JOIN transactions t ON c.customerid = t.customerid
+GROUP BY c.customerid, c.name;
+
+---- Q3. How many products have been purchased by each customer?
+SQL Query :
+
+SELECT c.customerid, c.name, COUNT(t.ProductID) As ProductsPurchased
+FROM Customer c
+JOIN Transaction t ON c.customerid = t.customerid
+GROUP BY c.customerid, c.name;
+
+---- Q4. Which product category is the most popular?
+SQL Query :
+
+SELECT p.category, COUNT(t.productid) AS ProductCount
+FROM Product p
+JOIN Transaction t ON p.productid = t.productid
+GROUP BY p.category
+ORDER BY ProductCount DESC;
+
+---- Q5. What is the trend of transactions over time?
+SQL Query :
+
+SELECT t.TranscationDate, SUM(t.TotalAmount) AS DailyTotal
+FROM Transactions t
+GROUP BY t.TransacationDate
+ORDER BY t.TransacationDate;
